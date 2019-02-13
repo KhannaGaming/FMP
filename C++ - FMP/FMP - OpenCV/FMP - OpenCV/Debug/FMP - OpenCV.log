@@ -1,0 +1,6 @@
+﻿  Source.cpp
+Source.obj : error LNK2019: unresolved external symbol "void __cdecl cv::fastFree(void *)" (?fastFree@cv@@YAXPAX@Z) referenced in function "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ)
+Source.obj : error LNK2019: unresolved external symbol "public: void __thiscall cv::Mat::deallocate(void)" (?deallocate@Mat@cv@@QAEXXZ) referenced in function "public: void __thiscall cv::Mat::release(void)" (?release@Mat@cv@@QAEXXZ)
+Source.obj : error LNK2019: unresolved external symbol "class cv::Mat __cdecl cv::imread(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)" (?imread@cv@@YA?AVMat@1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z) referenced in function _main
+D:\GitHub\FMP\C++ - FMP\FMP - OpenCV\x64\vc15\lib\opencv_world401d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+D:\GitHub\FMP\C++ - FMP\FMP - OpenCV\Debug\FMP - OpenCV.exe : fatal error LNK1120: 3 unresolved externals
