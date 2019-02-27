@@ -7,84 +7,95 @@ using namespace std;
 double getPSNR(const Mat& I1, const Mat& I2);
 Scalar getMSSIM(const Mat& i1, const Mat& i2);
 
-int main(int argv, char** argc)
+int main()
 {
-	stringstream conv;
-	int psnrTriggerValue, delay;
-	conv >> psnrTriggerValue >> delay;        // take out the numbers
-
-	// Frame counter
-	int frameNum = -1;
-
+	
+	// Create a VideoCapture object and open the input file
+	// If the input is the web camera, pass 0 instead of the video file name
 	VideoCapture cap(0);
-	if (!cap.isOpened())
-	{
-		cout << "change the camera port number";
+	cap.open(0);
+
+	// Check if camera opened successfully
+	if (!cap.isOpened()) {
+		cout << "Error opening video stream or file" << endl;
 		return -1;
 	}
+	CascadeClassifier face_cascade;
+	face_cascade.load("D:/GitHub/FMP/C++ - FMP/opencv/build/etc/haarcascades/haarcascade_frontalface_alt2.xml");
+		Mat frame;
+		CascadeClassifier eye_cascade;
+		eye_cascade.load("D:/GitHub/FMP/C++ - FMP/opencv/build/etc/haarcascades/haarcascade_eye.xml");
+		
+	while (1) {
 
-	Size refS = Size((int)cap.get(CAP_PROP_FRAME_WIDTH),
-		(int)cap.get(CAP_PROP_FRAME_HEIGHT)),
-		uTSi = Size((int)cap.get(CAP_PROP_FRAME_WIDTH),
-		(int)cap.get(CAP_PROP_FRAME_HEIGHT));
 
-	if (refS != uTSi)
-	{
-		cout << "Inputs have different size!!! Closing." << endl;
-		return -1;
-	}
+		// Image from camera to Mat
 
-	const char* WIN_UT = "Under Test";
-	const char* WIN_RF = "Reference";
+		cap >> frame;
 
-	//Windows 
-	namedWindow(WIN_RF, WINDOW_AUTOSIZE);
-	namedWindow(WIN_UT, WINDOW_AUTOSIZE);
-	moveWindow(WIN_RF, 400, 0);         
-	moveWindow(WIN_UT, refS.width, 0);   
+		// obtain input image from source
+		cap.retrieve(frame, CAP_OPENNI_BGR_IMAGE);
 
-	cout << "Reference frame resolution: Width=" << refS.width << "  Height=" << refS.height
-		<< " of nr#: " << cap.get(CAP_PROP_FRAME_COUNT) << endl;
-	cout << "PSNR trigger value " << setiosflags(ios::fixed) << setprecision(3)
-		<< psnrTriggerValue << endl;
+		// Just resize input image if you want
+		//resize(frame, frame, Size(1000, 640));
 
-	Mat previousFrame, currentFrame;
-	double psnrV;
-	Scalar mssimV;
+		Mat frame_gray;
+		cvtColor(frame, frame_gray, COLOR_BGR2GRAY);
+		equalizeHist(frame_gray, frame_gray);
 
-	cap.read(previousFrame);
-	cap.read(currentFrame);
+		// Container of faces
+		vector<Rect> faces;
+		vector<Rect> eyes;
 
-	for (;;)
-	{
-		currentFrame.copyTo(previousFrame);
-		cap >> currentFrame;
 
-		if (currentFrame.empty() || previousFrame.empty())
+		// Detect faces
+		face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0, Size(140, 140));
+		//eye_cascade.detectMultiScale(frame,eyes, 1.1, 1000, 0, Size(30, 30));
+
+
+		//Show the results
+		// Draw circles on the detected faces
+
+		/*for (int i = 0; i < faces.size(); i++)
 		{
-			cout << " < < <  Game over!  > > > ";
+			Point center(faces[i].x + faces[i].width*0.5, faces[i].y + faces[i].height*0.5);
+			ellipse(frame, center, Size(faces[i].width*0.5, faces[i].height*0.5), 0, 0, 360, Scalar(255, 0, 255), 4, 8, 0);
+		}*/
+
+		// To draw rectangles around detected faces
+		for (unsigned i = 0; i < faces.size(); i++)
+		{
+			Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
+			ellipse(frame, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360, Scalar(255, 0, 255), 4);
+			Mat faceROI = frame_gray(faces[i]);
+			//-- In each face, detect eyes
+			std::vector<Rect> eyes;
+			eye_cascade.detectMultiScale(faceROI, eyes, 1.1, 20, 0, Size(10, 10));
+			for (size_t j = 0; j < eyes.size(); j++)
+			{
+				Point eye_center(faces[i].x + eyes[j].x + eyes[j].width / 2, faces[i].y + eyes[j].y + eyes[j].height / 2);
+				int radius = cvRound((eyes[j].width + eyes[j].height)*0.25);
+				circle(frame, eye_center, radius, Scalar(255, 0, 0), 4);
+			}
+		}
+
+		imshow("wooohooo", frame);
+
+		// Press  ESC on keyboard to exit
+		char c = (char)waitKey(25);
+		if (c == 27)
 			break;
-		}
-		++frameNum;
-		cout << "Frame: " << frameNum << "# ";
-
-		psnrV = getPSNR(currentFrame, previousFrame);
-		cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
-		if (psnrV < psnrTriggerValue && psnrV)
-		{
-			mssimV = getMSSIM(currentFrame, previousFrame);
-			cout << " MSSIM: "
-				<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-				<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-				<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
-		}
-		cout << endl;
-		imshow(WIN_RF, currentFrame);
-		imshow(WIN_UT, previousFrame);
-		char c = (char)waitKey(delay);
-		if (c == 27) break;
 	}
+
+	// When everything done, release the video capture object
+	cap.release();
+
+	// Closes all the frames
+	//destroyAllWindows();
+
 	return 0;
+
+	
 }
 
 double getPSNR(const Mat& I1, const Mat& I2)
