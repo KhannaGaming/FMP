@@ -17,7 +17,7 @@ private:
 	//POINTERS
 	Camera * m_pCamera;
 	FilterFactory* m_pFilterFactory;
-
+	Mat* m_pCurrentFrame;
 	//************************************************
 	//VARIABELS
 	int m_cameraState = 0;
@@ -30,8 +30,8 @@ private:
 
 	//************************************************
 	//METHODS
-	void DetectFace(Mat inputMatrix);
-	void DetectEyes(Mat inputMatrix);
-	void DisplayDetecedFeatures(Mat inputMatrix);
+	void DetectFace(Mat* inputMatrix);
+	void DetectEyes(Mat* inputMatrix);
+	void DisplayDetectedFeatures(Mat* inputMatrix);
 };
 

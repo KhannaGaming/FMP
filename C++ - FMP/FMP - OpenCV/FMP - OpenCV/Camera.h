@@ -11,8 +11,14 @@ public:
 	~Camera();
 		
 	int Init();
-	Mat GetCameraFrame();
+	void GetCameraFrame(Mat* currentFrame);
+	float GetCameraWidth();
+	float GetCameraHeight();
+
 private:
+
 	VideoCapture m_Camera;
+	float m_CameraWidth;
+	float m_CameraHeight;
 };
 
