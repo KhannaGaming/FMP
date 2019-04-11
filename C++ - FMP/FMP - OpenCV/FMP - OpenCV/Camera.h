@@ -11,7 +11,7 @@ public:
 	~Camera();
 		
 	int Init();
-	void GetCameraFrame(Mat* currentFrame);
+	void GetCameraFrame(UMat* currentFrame);
 	float GetCameraWidth();
 	float GetCameraHeight();
 

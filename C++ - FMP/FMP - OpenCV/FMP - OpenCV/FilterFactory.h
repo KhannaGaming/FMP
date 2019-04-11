@@ -14,15 +14,15 @@ public:
 	~FilterFactory();
 	//************************************************
 	//METHODS
-	void ApplyGreyScale(Mat* inputMatrix);
-	void ApplyGaussianBlur(Mat* inputMatrix, Size kernalSize, double sigmaX);
-	void ApplyGaussianBlur(Mat* inputMatrix, Size kernalSize, double sigmaX, double sigmaY, int borderType);
-	void ApplyErosion(Mat* inputMatrix, int kernalType, int kernalSize);
-	void ApplyDilation(Mat* inputMatrix, int kernalType, int kernalSize);
-	void ConvertBGRToHSV(Mat* inputMatrix);
-	vector<Mat> BuildPyramid(Mat* inputMatrix, int maxLevel, int borderType = BORDER_DEFAULT);
-	Mat* EliminateBrightLight(Mat* inputMatrix, bool trackBar = false, string winName = "");
-	void GammaCorrection(Mat* inputMatrix, bool trackBar = false, string winName = "");
+	void ApplyGreyScale(UMat* inputMatrix);
+	void ApplyGaussianBlur(UMat* inputMatrix, Size kernalSize, double sigmaX);
+	void ApplyGaussianBlur(UMat* inputMatrix, Size kernalSize, double sigmaX, double sigmaY, int borderType);
+	void ApplyErosion(UMat* inputMatrix, int kernalType, int kernalSize);
+	void ApplyDilation(UMat* inputMatrix, int kernalType, int kernalSize);
+	void ConvertBGRToHSV(UMat* inputMatrix);
+	vector<UMat> BuildPyramid(UMat* inputMatrix, int maxLevel, int borderType = BORDER_DEFAULT);
+	void EliminateBrightLight(UMat* inputMatrix, bool trackBar = false, string winName = "");
+	void GammaCorrection(UMat* inputMatrix, bool trackBar = false, string winName = "");
 
 private:
 	//************************************************

@@ -25,7 +25,7 @@ int Camera::Init()
 		return -1;
 }
 
-void Camera::GetCameraFrame(Mat* currentFrame)
+void Camera::GetCameraFrame(UMat* currentFrame)
 {
 	if (!m_Camera.read(*currentFrame))
 	{

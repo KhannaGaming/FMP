@@ -1,6 +1,6 @@
 ﻿  FaceDetection.cpp
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(81): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(84): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(92): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(107): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(111): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   FMP - OpenCV.vcxproj -> D:\GitHub\FMP\C++ - FMP\FMP - OpenCV\x64\Debug\FMP - OpenCV.exe

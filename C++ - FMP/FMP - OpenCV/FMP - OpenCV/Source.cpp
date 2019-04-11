@@ -2,6 +2,8 @@
 
 int main()
 {
+	ocl::setUseOpenCL(true);
+
 	FaceDetection* faceDetection = new FaceDetection();
 	faceDetection->Run();
 

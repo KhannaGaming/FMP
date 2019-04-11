@@ -1,7 +1,9 @@
 #pragma once
 #include "Camera.h"
 #include "FilterFactory.h"
-
+#include "opencv2/core/cuda_types.hpp"
+#include "opencv2/core/cuda.inl.hpp"
+#include <opencv2/core/ocl.hpp>
 class FaceDetection
 {
 public:
@@ -17,7 +19,7 @@ private:
 	//POINTERS
 	Camera * m_pCamera;
 	FilterFactory* m_pFilterFactory;
-	Mat* m_pCurrentFrame;
+	UMat* m_pCurrentFrame;
 	//************************************************
 	//VARIABELS
 	int m_cameraState = 0;
@@ -25,13 +27,14 @@ private:
 	int m_kernalSize = 0;
 	vector <Rect> m_vFaces;
 	vector <Rect> m_vEyes;
-	CascadeClassifier face_cascade;
-	CascadeClassifier eye_cascade;
-
+	Ptr<CascadeClassifier> face_cascade;
+	Ptr<CascadeClassifier> eye_cascade;
+	int m_scaleSlider = 12;
+	int neibourcount = 20;
 	//************************************************
 	//METHODS
-	void DetectFace(Mat* inputMatrix);
-	void DetectEyes(Mat* inputMatrix);
-	void DisplayDetectedFeatures(Mat* inputMatrix);
+	void DetectFace(UMat* inputMatrix);
+	void DetectEyes(UMat* inputMatrix);
+	void DisplayDetectedFeatures(UMat* inputMatrix);
 };
 
