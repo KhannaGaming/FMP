@@ -27,7 +27,11 @@ public:
 private:
 	//************************************************
 	//VARIABELS
-	int m_gammaSlider = GAMMA_MAX/2;
-	int m_saturationSlider = SATURATION_MAX;
+	int m_gammaSlider = GAMMA_MAX;
+	
+	///<summary> Bright Light slider for trackbar.
+	///<para> Currently set to 150 being the most optimal.</para>
+	///</summary>
+	int m_saturationSlider = 150;
 };
 

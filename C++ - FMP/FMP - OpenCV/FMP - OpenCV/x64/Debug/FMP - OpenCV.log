@@ -1,6 +1,11 @@
-﻿  FaceDetection.cpp
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(107): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(111): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\github\fmp\c++ - fmp\fmp - opencv\fmp - opencv\facedetection.cpp(114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+﻿  Game.cpp
+d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\task_group.h(130): warning C4297: 'tbb::internal::task_group_base::~task_group_base': function assumed not to throw an exception but does
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\task_group.h(130): note: destructor or deallocator has a (possibly implicit) non-throwing exception specification
+d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(120): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(119): note: while compiling class template member function 'void tbb::interface6::internal::ets_base<tbb::ets_no_key>::free(tbb::interface6::internal::ets_base<tbb::ets_no_key>::array *)'
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(219): note: see reference to function template instantiation 'void tbb::interface6::internal::ets_base<tbb::ets_no_key>::free(tbb::interface6::internal::ets_base<tbb::ets_no_key>::array *)' being compiled
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(246): note: see reference to class template instantiation 'tbb::interface6::internal::ets_base<tbb::ets_no_key>' being compiled
+d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(113): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(112): note: while compiling class template member function 'tbb::interface6::internal::ets_base<tbb::ets_no_key>::array *tbb::interface6::internal::ets_base<tbb::ets_no_key>::allocate(::size_t)'
+  d:\github\fmp\c++ - fmp\fmp - opencv\packages\tbb.4.2.3.1\build\native\include\tbb\enumerable_thread_specific.h(210): note: see reference to function template instantiation 'tbb::interface6::internal::ets_base<tbb::ets_no_key>::array *tbb::interface6::internal::ets_base<tbb::ets_no_key>::allocate(::size_t)' being compiled
   FMP - OpenCV.vcxproj -> D:\GitHub\FMP\C++ - FMP\FMP - OpenCV\x64\Debug\FMP - OpenCV.exe

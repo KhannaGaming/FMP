@@ -70,40 +70,51 @@ void FilterFactory::EliminateBrightLight(UMat * inputMatrix, bool trackBar, stri
 
 void FilterFactory::GammaCorrection(UMat * inputMatrix, bool trackBar, string winName)
 {
-	//if (trackBar)
-	//	createTrackbar("Gamma", winName, &m_gammaSlider, GAMMA_MAX);
-	//float gamma = m_gammaSlider / 10.0f;
+	if (trackBar)
+		createTrackbar("Gamma", winName, &m_gammaSlider, GAMMA_MAX);
+	float gamma = m_gammaSlider / 10.0f;
 
-	//unsigned char lut[256];
+	Mat temp = inputMatrix->getMat(ACCESS_RW);
+	unsigned char lut[256];
 
-	//for (int i = 0; i < 256; i++)
-	//{
-	//	lut[i] = saturate_cast<uchar>(pow((float)(i / 255.0), gamma) * 255.0f);
-	//}
+	for (int i = 0; i < 256; i++)
+	{
+		lut[i] = saturate_cast<uchar>(pow((float)(i / 255.0), gamma) * 255.0f);
+	}
 
 
-	//const int channels = inputMatrix->channels();
-	//switch (channels)
-	//{
-	//case 1:
-	//{
-	//	MatIterator_<uchar> it, end;
-	//	for (it = inputMatrix->begin<uchar>(), end = inputMatrix->end<uchar>(); it != end; it++)
-	//		*it = lut[(*it)];
-	//	break;
-	//}
+	const int channels = temp.channels();
+	switch (channels)
+	{
+	case 1:
+	{
+		MatIterator_<uchar> it, end;
+		for (it = temp.begin<uchar>(), end = temp.end<uchar>(); it != end; it++)
+			*it = lut[(*it)];
+		break;
+	}
 
-	//case 3:
-	//{
-	//	MatIterator_<Vec3b> it, end;
-	//	for (it = inputMatrix->begin<Vec3b>(), end = inputMatrix->end<Vec3b>(); it != end; it++)
-	//	{
-	//		(*it)[0] = lut[((*it)[0])];
-	//		(*it)[1] = lut[((*it)[1])];
-	//		(*it)[2] = lut[((*it)[2])];
+	case 3:
+	{
+		MatIterator_<Vec3b> it, end;
+		for (it = temp.begin<Vec3b>(), end = temp.end<Vec3b>(); it != end; it++)
+		{
+			(*it)[0] = lut[((*it)[0])];
+			(*it)[1] = lut[((*it)[1])];
+			(*it)[2] = lut[((*it)[2])];
+		}
+		break;
+	}
+	}
+	//double alpha = 1.0; /*< Simple contrast control */
+	//int beta = 0;       /*< Simple brightness control */
+	//UMat temp = UMat::zeros(inputMatrix->size(), inputMatrix->type());
+	//for (int y = 0; y < inputMatrix->rows; y++) {
+	//	for (int x = 0; x < inputMatrix->cols; x++) {
+	//		for (int c = 0; c < inputMatrix->channels(); c++) {
+	//			temp.getMat(ACCESS_RW).at<Vec3b>(y, x)[c] =
+	//				saturate_cast<uchar>(alpha*temp.getMat(ACCESS_RW).at<Vec3b>(y, x)[c] + beta);
+	//		}
 	//	}
-	//	break;
 	//}
-	//}
-
 }

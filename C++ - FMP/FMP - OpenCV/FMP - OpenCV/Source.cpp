@@ -1,14 +1,12 @@
-#include "FaceDetection.h"
+#include "Game.h"
 
 int main()
 {
-	ocl::setUseOpenCL(true);
-
-	FaceDetection* faceDetection = new FaceDetection();
-	faceDetection->Run();
-
-	delete faceDetection;
-	faceDetection = nullptr;
+	Game* game = new Game();
+	game->Run();
+	game->Release();
+	delete game;
+	game = nullptr;
 
 	return 0;
 }
