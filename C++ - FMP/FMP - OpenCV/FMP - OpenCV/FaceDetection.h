@@ -10,6 +10,11 @@ class FaceDetection
 {
 public:
 	//************************************************
+	//VARIABELS
+	int m_leftEyeWinkCount = 0;
+	int m_rightEyeWinkCount = 0;
+
+	//************************************************
 	//METHODS
 	FaceDetection();
 	~FaceDetection();
@@ -28,8 +33,8 @@ private:
 	vector <Rect> m_vEyes;
 	CascadeClassifier face_cascade;
 	CascadeClassifier eye_cascade;
-	int m_scaleSlider = 12;
-	int neibourcount = 20;
+	int m_scaleSlider = 11;
+	int neibourcount = 8;
 
 };
 

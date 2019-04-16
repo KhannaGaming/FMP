@@ -70,7 +70,7 @@ void Game::Update()
 	m_pFilterFactory->EliminateBrightLight(m_pCurrentFrame, true, WIN_NAME);
 	equalizeHist(*m_pCurrentFrame, *m_pCurrentFrame);
 	m_pFilterFactory->GammaCorrection(m_pCurrentFrame,true, WIN_NAME);
-	m_pFilterFactory->ApplyDilation(m_pCurrentFrame, MORPH_ELLIPSE, 2);
+	//m_pFilterFactory->ApplyDilation(m_pCurrentFrame, MORPH_ELLIPSE, 2);
 
 	//Apply Face Detection Algorithm
 	faceDetection->DetectFace(m_pCurrentFrame);
@@ -81,5 +81,7 @@ void Game::Update()
 void Game::Render()
 {
 	//Present results
+	putText(*m_pCurrentFrame, "Left wink count" + to_string(faceDetection->m_leftEyeWinkCount), Point2f(0, 400), FONT_HERSHEY_PLAIN, 2, Scalar(255, 0, 0), 2, 8, false);
+	putText(*m_pCurrentFrame, "Right wink count" + to_string(faceDetection->m_rightEyeWinkCount), Point2f(0, 420), FONT_HERSHEY_PLAIN, 2, Scalar(255, 0, 0), 2, 8, false);
 	imshow(WIN_NAME, *m_pCurrentFrame);
 }
