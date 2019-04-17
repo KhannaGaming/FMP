@@ -28,9 +28,9 @@ private:
 	//************************************************
 	//VARIABELS
 	///<summary> Gamma slider for trackbar.
-	///<para> Currently set to 17 being the most optimal.</para>
+	///<para> Currently set to 8 being the most optimal.</para>
 	///</summary>
-	int m_gammaSlider = 17;
+	int m_gammaSlider = 8;
 	
 	///<summary> Bright Light slider for trackbar.
 	///<para> Currently set to 93 being the most optimal.</para>

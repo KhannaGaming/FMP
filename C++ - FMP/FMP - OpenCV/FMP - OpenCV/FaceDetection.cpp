@@ -22,17 +22,18 @@ FaceDetection::~FaceDetection()
 
 void FaceDetection::DetectFace(UMat* inputMatrix)
 {
-	face_cascade.detectMultiScale(*inputMatrix, m_vFaces, 1.2, 2, 0, Size(30, 30));	
+	face_cascade.detectMultiScale(*inputMatrix, m_vFaces, 1.1, 2, 0, Size(50, 50));	
 }
 
 void FaceDetection::DetectEyes(UMat* inputMatrix)
 {
 	createTrackbar("scaleFactor", WIN_NAME, &m_scaleSlider, SCALE_MAX);
 	createTrackbar("neighbours", WIN_NAME, &neibourcount, neighbour_MAX);
+	createTrackbar("Detection Size", WIN_NAME, &detectionSize, 100);
 	if (m_scaleSlider < 11)
 		m_scaleSlider = 11;
 	float temp = m_scaleSlider / 10.0f;
-	eye_cascade.detectMultiScale(*inputMatrix, m_vEyes, temp, neibourcount, 0, Size(50, 50));
+	eye_cascade.detectMultiScale(*inputMatrix, m_vEyes, temp, neibourcount, 0, Size(detectionSize, detectionSize));
 }
 
 void FaceDetection::DisplayDetectedFeatures(UMat* inputMatrix)

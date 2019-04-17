@@ -66,11 +66,11 @@ void Game::GetUserInput()
 void Game::Update()
 {
 	//Apply Filters
+	m_pFilterFactory->GammaCorrection(m_pCurrentFrame,true, WIN_NAME);
 	m_pFilterFactory->ApplyGreyScale(m_pCurrentFrame);
 	m_pFilterFactory->EliminateBrightLight(m_pCurrentFrame, true, WIN_NAME);
+	m_pFilterFactory->ApplyDilation(m_pCurrentFrame, MORPH_ELLIPSE, 2);
 	equalizeHist(*m_pCurrentFrame, *m_pCurrentFrame);
-	m_pFilterFactory->GammaCorrection(m_pCurrentFrame,true, WIN_NAME);
-	//m_pFilterFactory->ApplyDilation(m_pCurrentFrame, MORPH_ELLIPSE, 2);
 
 	//Apply Face Detection Algorithm
 	faceDetection->DetectFace(m_pCurrentFrame);

@@ -35,6 +35,6 @@ private:
 	CascadeClassifier eye_cascade;
 	int m_scaleSlider = 11;
 	int neibourcount = 8;
-
+	int detectionSize = 10;
 };
 
