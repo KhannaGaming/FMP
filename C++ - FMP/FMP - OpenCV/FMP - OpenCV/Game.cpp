@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	ocl::setUseOpenCL(true);
+	ocl::setUseOpenCL(false);
 	faceDetection = new FaceDetection();
 	m_pCamera = new Camera();
 	m_pFilterFactory = new FilterFactory();
