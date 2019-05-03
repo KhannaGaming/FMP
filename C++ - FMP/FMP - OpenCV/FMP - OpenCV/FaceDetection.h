@@ -1,9 +1,7 @@
 #pragma once
 #include "Camera.h"
 #include "FilterFactory.h"
-#include "opencv2/core/cuda_types.hpp"
-#include "opencv2/core/cuda.inl.hpp"
-#include <opencv2/core/ocl.hpp>
+#include "UserInterface.h"
 static string WIN_NAME = "Camera";
 
 class FaceDetection
@@ -13,6 +11,11 @@ public:
 	//VARIABELS
 	int m_leftEyeWinkCount = 0;
 	int m_rightEyeWinkCount = 0;
+	int m_scaleSlider = 11;
+	int neibourcount = 5;
+	int detectionSize = 10;
+	const int SCALE_MAX  = 20;
+	const int neighbour_MAX = 60;
 
 	//************************************************
 	//METHODS
@@ -21,6 +24,7 @@ public:
 	void DetectFace(UMat* inputMatrix);
 	void DetectEyes(UMat* inputMatrix);
 	void DisplayDetectedFeatures(UMat* inputMatrix);
+	void CreateTrackbars();
 
 private:
 	
@@ -33,8 +37,7 @@ private:
 	vector <Rect> m_vEyes;
 	CascadeClassifier face_cascade;
 	CascadeClassifier eye_cascade;
-	int m_scaleSlider = 11;
-	int neibourcount = 8;
-	int detectionSize = 10;
+	UserInterface m_pUI;
+	Scalar Red = Scalar(255, 0, 0);
 };
 

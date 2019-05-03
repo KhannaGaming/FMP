@@ -1,6 +1,7 @@
 #pragma once
 #include <opencv2\opencv.hpp>
 #include <opencv2\highgui\highgui.hpp>
+#include "UserInterface.h"
 #define SATURATION_MAX  255
 #define GAMMA_MAX  20
 
@@ -25,6 +26,9 @@ public:
 	void GammaCorrection(UMat* inputMatrix, bool trackBar = false, string winName = "");
 
 private:
+	//************************************************
+	//POINTERS
+
 	//************************************************
 	//VARIABELS
 	///<summary> Gamma slider for trackbar.

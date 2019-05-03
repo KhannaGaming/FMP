@@ -2,10 +2,11 @@
 
 Game::Game()
 {
-	ocl::setUseOpenCL(false);
+	ocl::setUseOpenCL(true);
 	faceDetection = new FaceDetection();
 	m_pCamera = new Camera();
 	m_pFilterFactory = new FilterFactory();
+	m_pUI = new UserInterface();
 }
 
 Game::~Game()
@@ -42,6 +43,9 @@ void Game::Release()
 
 	delete faceDetection;
 	faceDetection = nullptr;
+
+	delete m_pUI;
+	m_pUI = nullptr;
 }
 
 int Game::Init()
@@ -61,6 +65,11 @@ void Game::GetUserInput()
 
 	//Retrieve Camera frame
 	m_pCamera->GetCameraFrame(m_pCurrentFrame);
+
+	// Create Trackbars
+	m_pUI->CreateTrackbar("scaleFactor", WIN_NAME, &faceDetection->m_scaleSlider, faceDetection->SCALE_MAX);
+	m_pUI->CreateTrackbar("neighbours", WIN_NAME, &faceDetection->neibourcount, faceDetection->neighbour_MAX);
+	m_pUI->CreateTrackbar("Detection Size", WIN_NAME, &faceDetection->detectionSize, 100);
 }
 
 void Game::Update()
@@ -69,7 +78,6 @@ void Game::Update()
 	m_pFilterFactory->GammaCorrection(m_pCurrentFrame,true, WIN_NAME);
 	m_pFilterFactory->ApplyGreyScale(m_pCurrentFrame);
 	m_pFilterFactory->EliminateBrightLight(m_pCurrentFrame, true, WIN_NAME);
-	m_pFilterFactory->ApplyDilation(m_pCurrentFrame, MORPH_ELLIPSE, 2);
 	equalizeHist(*m_pCurrentFrame, *m_pCurrentFrame);
 
 	//Apply Face Detection Algorithm
@@ -81,7 +89,7 @@ void Game::Update()
 void Game::Render()
 {
 	//Present results
-	putText(*m_pCurrentFrame, "Left wink count" + to_string(faceDetection->m_leftEyeWinkCount), Point2f(0, 400), FONT_HERSHEY_PLAIN, 2, Scalar(255, 0, 0), 2, 8, false);
-	putText(*m_pCurrentFrame, "Right wink count" + to_string(faceDetection->m_rightEyeWinkCount), Point2f(0, 420), FONT_HERSHEY_PLAIN, 2, Scalar(255, 0, 0), 2, 8, false);
+	m_pUI->CreateOnScreenText(m_pCurrentFrame, "Left wink count" + to_string(faceDetection->m_leftEyeWinkCount), Point2f(0, 400));
+	m_pUI->CreateOnScreenText(m_pCurrentFrame, "Right wink count" + to_string(faceDetection->m_rightEyeWinkCount), Point2f(0, 420));
 	imshow(WIN_NAME, *m_pCurrentFrame);
 }

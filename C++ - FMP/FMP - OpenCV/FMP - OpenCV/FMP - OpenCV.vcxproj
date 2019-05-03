@@ -141,12 +141,14 @@
     <ClCompile Include="FilterFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FaceDetection.h" />
     <ClInclude Include="FilterFactory.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

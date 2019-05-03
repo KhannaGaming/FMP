@@ -17,6 +17,7 @@ private:
 	Camera * m_pCamera;
 	FilterFactory* m_pFilterFactory;
 	UMat* m_pCurrentFrame;
+	UserInterface* m_pUI;
 
 	//************************************************
 	//VARIABELS

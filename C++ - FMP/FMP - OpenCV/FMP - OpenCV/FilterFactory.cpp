@@ -60,12 +60,6 @@ void FilterFactory::EliminateBrightLight(UMat * inputMatrix, bool trackBar, stri
 	UMat   res;
 	bitwise_and(*inputMatrix, *inputMatrix, res, mask);
 	*inputMatrix = res;
-
-	/*delete res;
-	res = nullptr;
-
-	delete mask;
-	mask = nullptr;*/
 }
 
 void FilterFactory::GammaCorrection(UMat * inputMatrix, bool trackBar, string winName)
@@ -106,15 +100,4 @@ void FilterFactory::GammaCorrection(UMat * inputMatrix, bool trackBar, string wi
 		break;
 	}
 	}
-	//double alpha = 1.0; /*< Simple contrast control */
-	//int beta = 0;       /*< Simple brightness control */
-	//UMat temp = UMat::zeros(inputMatrix->size(), inputMatrix->type());
-	//for (int y = 0; y < inputMatrix->rows; y++) {
-	//	for (int x = 0; x < inputMatrix->cols; x++) {
-	//		for (int c = 0; c < inputMatrix->channels(); c++) {
-	//			temp.getMat(ACCESS_RW).at<Vec3b>(y, x)[c] =
-	//				saturate_cast<uchar>(alpha*temp.getMat(ACCESS_RW).at<Vec3b>(y, x)[c] + beta);
-	//		}
-	//	}
-	//}
 }
