@@ -1,0 +1,1 @@
+With Admin Rights folder is a release and debug version of the program which runs on the GPU, the other Debug and Release folder run on CPU.

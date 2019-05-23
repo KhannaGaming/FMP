@@ -23,12 +23,25 @@ private:
 	//VARIABELS
 	bool m_hasEnded = false;
 	int m_escapeKey = 27;
+	int m_maxSliderAmount = 11;
 
 	//************************************************
 	//METHODS
+	///<summary> Initialise game.
+	///</summary>
 	int Init();
+
+	///<summary> Get user input.
+	///</summary>
 	void GetUserInput();
+
+	///<summary> Update the game.
+	///<para> Apply filters and face detections.</para>
+	///</summary>
 	void Update();
+
+	///<summary> Render results to screen.
+	///</summary>
 	void Render();
 };
 

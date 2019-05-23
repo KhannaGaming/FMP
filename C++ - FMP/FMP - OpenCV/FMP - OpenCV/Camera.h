@@ -12,6 +12,10 @@ public:
 	~Camera();
 		
 	int Init();
+
+	///<summary> Detect Eyes
+	///<para> currentFrame = A matrix to allow an image from the camera to be saved to</para>
+	///</summary>
 	void GetCameraFrame(UMat* currentFrame);
 	float GetCameraWidth();
 	float GetCameraHeight();

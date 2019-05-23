@@ -18,5 +18,5 @@ void UserInterface::CreateTrackbar(string name, string windowName, int* value, i
 
 void UserInterface::CreateOnScreenText(UMat* img, string text, Point2f location)
 {
-	putText(*img, text, location, FONT_HERSHEY_PLAIN, 2, Scalar(255, 0, 0), 2, 8, false);
+	putText(*img, text, location, FONT_HERSHEY_PLAIN, m_fontSize, m_Red, m_lineThickness);
 }

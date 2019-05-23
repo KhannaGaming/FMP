@@ -7,6 +7,5 @@ int main()
 	game->Release();
 	delete game;
 	game = nullptr;
-
 	return 0;
 }

@@ -6,11 +6,13 @@
 
 FaceDetection::FaceDetection()
 {
-	m_sigma = 3;
-	m_kernalSize = (m_sigma * 5) | 1;
-	//face_cascade.load("../../opencv/build/etc/haarcascades/haarcascade_frontalface_alt_tree.xml");
-	face_cascade.load("../../opencv/build/etc/lbpcascades/lbpcascade_frontalface.xml");
-	eye_cascade.load("../../opencv/build/etc/haarcascades/haarcascade_eye_tree_eyeglasses.xml");
+#ifdef _DEBUG
+	m_faceCascade.load("lbpcascade_frontalface.xml");
+	m_eyeCascade.load("haarcascade_eye_tree_eyeglasses.xml");
+#else
+	m_faceCascade.load("lbpcascade_frontalface.xml");
+	m_eyeCascade.load("haarcascade_eye_tree_eyeglasses.xml");
+#endif
 }
 
 
@@ -21,32 +23,33 @@ FaceDetection::~FaceDetection()
 
 void FaceDetection::DetectFace(UMat* inputMatrix)
 {
-	face_cascade.detectMultiScale(*inputMatrix, m_vFaces, 1.1, 2, 0, Size(50, 50));	
+	m_faceCascade.detectMultiScale(*inputMatrix, m_vFaces, m_faceScaleFactor, m_faceNeighbourCount, 0, Size(m_faceDetectionSize, m_faceDetectionSize));
 }
 
 void FaceDetection::DetectEyes(UMat* inputMatrix)
 {
 	float temp = m_scaleSlider / 10.0f;
-	eye_cascade.detectMultiScale(*inputMatrix, m_vEyes, temp, neibourcount, 0, Size(detectionSize, detectionSize));
+	m_eyeCascade.detectMultiScale(*inputMatrix, m_vEyes, temp, m_eyeNeighbourCount, 0, Size(m_eyeDetectionSize, m_eyeDetectionSize));
 }
 
 void FaceDetection::DisplayDetectedFeatures(UMat* inputMatrix)
 {
+	m_RightEyeClosed = false;
+	m_LeftEyeClosed = false;
 	for (size_t i = 0; i < m_vFaces.size(); i++)
 	{
 		// Find the centre point of each face
 		Point centre(m_vFaces[i].x + (m_vFaces[i].width / 2), m_vFaces[i].y + (m_vFaces[i].height / 2));
 
 		// Draw a circle around each face
-		ellipse(*inputMatrix, centre, Size(m_vFaces[i].width / 2, m_vFaces[i].height / 2), 0, 0, 360, Red, 4, 8, 0);
+		ellipse(*inputMatrix, centre, Size(m_vFaces[i].width / 2, m_vFaces[i].height / 2), 0, 0, 360, m_Red, m_borderThickness);
 		for (size_t i = 0; i < m_vEyes.size(); i++)
 		{
 			// Find the centre point of each eye
 			Point centre(m_vEyes[i].x + (m_vEyes[i].width / 2), m_vEyes[i].y + (m_vEyes[i].height / 2));
 
 			// Draw a circle around each face
-			ellipse(*inputMatrix, centre, Size(m_vEyes[i].width / 2, m_vEyes[i].height / 2), 0, 0, 360, Red, 4, 8, 0);
-
+			ellipse(*inputMatrix, centre, Size(m_vEyes[i].width / 2, m_vEyes[i].height / 2), 0, 0, 360, m_Red, m_borderThickness);
 		}
 
 	}
@@ -55,22 +58,13 @@ void FaceDetection::DisplayDetectedFeatures(UMat* inputMatrix)
 		{
 			if (m_vEyes[0].x > (m_vFaces[0].x + (m_vFaces[0].width / 2)))
 			{
-				++m_rightEyeWinkCount;
+				m_RightEyeClosed = true;
 			}
 			else
 			{
-				++m_leftEyeWinkCount;
+				m_LeftEyeClosed = true;
 			}
 		}
-}
-
-void FaceDetection::CreateTrackbars()
-{
-	//m_pUI->CreateTrackbar("scaleFactor", WIN_NAME, m_scaleSlider, SCALE_MAX);
-	//m_pUI->CreateTrackbar("neighbours", WIN_NAME, neibourcount, neighbour_MAX);
-	//m_pUI->CreateTrackbar("Detection Size", WIN_NAME, detectionSize, 100);
-	if (m_scaleSlider < 11)
-		m_scaleSlider = 11;
 }
 
 
